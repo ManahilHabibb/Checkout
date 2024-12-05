@@ -1,12 +1,20 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
+import CheckButton from './CheckButton';
 
-const Cards = () => (
+const Cards = ({ image, title, description, payment }) => (
   <View style={styles.container}>
-    <TouchableOpacity style={styles.card}>
-      <Text style={styles.title}>Card Title</Text>
-      <Text style={styles.description}>Card Description</Text>
-    </TouchableOpacity>
+    <View>
+      <TouchableOpacity style={styles.card}>
+        <Image source={image} style={{ width: 50, height: 50 }} />
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.payment}>{payment}</Text>
+      </TouchableOpacity>
+    </View>
+    <View>
+      <CheckButton />
+    </View>
   </View>
 );
 
@@ -34,6 +42,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   description: {
+    fontSize: 16,
+    color: '#666',
+  },
+  payment: {
     fontSize: 16,
     color: '#666',
   },
