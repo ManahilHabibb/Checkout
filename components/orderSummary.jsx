@@ -6,13 +6,13 @@ const OrderSummary = () => (
   <View style={styles.checkout}>
     <Text style={styles.order}>Order Summary</Text>
     <View style={styles.summary}>
-      <View style={styles.lefttext}>
+      <View style={styles.leftText}>
         <Text>Monthly furniture total</Text>
         <Text>Delivery and assembly</Text>
         <Text>Rental period</Text>
         <Text>Subtotal</Text>
       </View>
-      <View style={styles.righttext}>
+      <View style={styles.rightText}>
         <Text>$123/mo</Text>
         <Text>$199</Text>
         <Text>2 months</Text>
@@ -21,7 +21,6 @@ const OrderSummary = () => (
     </View>
     <TouchableOpacity style={styles.button}>
       <Text style={styles.buttonText}>Rent</Text>
-      <FontAwesome name="shopping-cart" size={24} color="#FFF" />
     </TouchableOpacity>
   </View>
 );
@@ -33,10 +32,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderRadius: 6,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
@@ -44,26 +40,27 @@ const styles = StyleSheet.create({
   order: {
     fontSize: 16,
     fontWeight: 'bold',
+    marginBottom: 10,
   },
   summary: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: 16,
   },
-  lefttext: {
+  leftText: {
     flexDirection: 'column',
-    justifyContent: 'space-between',
   },
-  righttext: {
+  rightText: {
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
   button: {
-    marginTop: 16,
     backgroundColor: '#002DFF',
     padding: 14,
     borderRadius: 6,
     alignItems: 'center',
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   buttonText: {
     fontSize: 16,

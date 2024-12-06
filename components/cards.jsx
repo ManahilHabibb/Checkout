@@ -4,15 +4,15 @@ import CheckButton from './CheckButton';
 
 const Cards = ({ image, title, description, payment }) => (
   <View style={styles.container}>
-    <View>
-      <TouchableOpacity style={styles.card}>
-        <Image source={image} style={{ width: 50, height: 50 }} />
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
-        <Text style={styles.payment}>{payment}</Text>
-      </TouchableOpacity>
+    <View style={styles.imageContainer}>
+      <Image source={image} style={styles.image} />
     </View>
-    <View>
+    <View style={styles.textContainer}>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.description}>{description}</Text>
+      <Text style={styles.payment}>{payment}</Text>
+    </View>
+    <View style={styles.buttonContainer}>
       <CheckButton />
     </View>
   </View>
@@ -20,34 +20,50 @@ const Cards = ({ image, title, description, payment }) => (
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'row',
     alignItems: 'center',
-  },
-  card: {
-    width: 300,
-    height: 200,
     backgroundColor: '#fff',
     borderRadius: 10,
-    padding: 20,
+    marginBottom: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    padding: 10,
+    width: 350,
+  },
+  imageContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  image: {
+    width: 80,
+    height: 80,
+    borderRadius: 10,
+  },
+  textContainer: {
+    flex: 2,
+    paddingHorizontal: 10,
   },
   title: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 5,
   },
   description: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#666',
+    marginBottom: 5,
   },
   payment: {
     fontSize: 16,
     color: '#666',
+  },
+  buttonContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
 });
 

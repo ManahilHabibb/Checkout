@@ -1,27 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 
 const CheckButton = () => {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = useState(0);
+
+  const increment = () => setCount((prev) => prev + 1);
+  const decrement = () => setCount((prev) => (prev > 0 ? prev - 1 : 0));
 
   return (
     <View style={styles.checkout}>
-      
-      {/* Decrement */}
-      <TouchableOpacity style={styles.decrement} onPress={() => setCount(count - 1)}>
+      <TouchableOpacity style={styles.decrement} onPress={decrement}>
         <Text style={styles.decrementText}>-</Text>
       </TouchableOpacity>
-
-      {/* Number */}
       <Text style={styles.number}>{count}</Text>
-
-      {/* Increment */}
-      <TouchableOpacity style={styles.increment} onPress={() => setCount(count + 1)}>
+      <TouchableOpacity style={styles.increment} onPress={increment}>
         <Text style={styles.incrementText}>+</Text>
       </TouchableOpacity>
-
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
