@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Cards from './components/Cards';
 import OrderSummary from './components/OrderSummary';
-
+import Header from './components/header';
 const App = () => {
   const cardData = [
     {
@@ -30,6 +30,7 @@ const App = () => {
 
   return (
     <View style={styles.container}>
+      <Header />
       {cardData.map((data) => (
         <Cards
           key={data.id}
