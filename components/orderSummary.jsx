@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const OrderSummary = () => (
+const OrderSummary = ({ totalPayment }) => (
   <View style={styles.checkout}>
     <Text style={styles.order}>Order Summary</Text>
     <View style={styles.summary}>
@@ -13,10 +12,10 @@ const OrderSummary = () => (
         <Text>Subtotal</Text>
       </View>
       <View style={styles.rightText}>
-        <Text>$123/mo</Text>
+        <Text>${totalPayment}</Text>
         <Text>$199</Text>
         <Text>2 months</Text>
-        <Text>$322</Text>
+        <Text>${totalPayment + 199}</Text>
       </View>
     </View>
     <TouchableOpacity style={styles.button}>

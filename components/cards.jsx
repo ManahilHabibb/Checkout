@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
-import CheckButton from './checkbutton';
+import CheckButton from './CheckButton';
 
-const Cards = ({ image, title, description, payment, onPress }) => (
-  <TouchableOpacity onPress={onPress} style={styles.container}>
-    <View style={styles.imageContainer}>
-      <Image source={image} style={styles.image} />
-    </View>
-    <View style={styles.textContainer}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
-      <Text style={styles.payment}>{payment}</Text>
-    </View>
-    <View style={styles.buttonContainer}>
-      <CheckButton />
-    </View>
-  </TouchableOpacity>
-);
+const MyCards = ({ image, title, description, payment, updateOrder }) => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <TouchableOpacity style={styles.container}>
+      <View style={styles.imageContainer}>
+        <Image source={image} style={styles.image} />
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.payment}>${payment * count}/mo</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <CheckButton count={count} setCount={setCount} updateOrder={updateOrder} />
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -67,4 +71,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Cards;
+export default MyCards;

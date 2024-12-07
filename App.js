@@ -1,46 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import Cards from './Cards';
-import OrderSummary from './components/OrderSummary';
-import Header from './components/header';
+import MyCards from './Cards';
+import OrderSummary from './OrderSummary';
+import Header from './Header';
+
 const App = () => {
+  const [totalPayment, setTotalPayment] = useState(0);
+
   const cardData = [
-    {
-      id: 1,
-      image: require('./assets/1.png'),
-      title: 'Florence Chair',
-      description: '$45/mo.',
-      payment: '$45/mo',
-    },
-    {
-      id: 2,
-      image: require('./assets/2.png'),
-      title: 'Florence Chair',
-      description: '$897',
-      payment: '$39/mo',
-    },
-    {
-      id: 3,
-      image: require('./assets/3.png'),
-      title: 'Harper Swivel Chair',
-      description: '$800.',
-      payment: '$28/mo',
-    },
+    { id: 1, image: require('./assets/1.png'), title: 'Florence Chair', description: '$45/mo.', payment: 45 },
+    { id: 2, image: require('./assets/2.png'), title: 'Florence Sofa', description: '$39/mo.', payment: 39 },
+    { id: 3, image: require('./assets/3.png'), title: 'Harper Chair', description: '$28/mo.', payment: 28 },
   ];
+
+  const updateOrder = (amount) => {
+    setTotalPayment((prev) => prev + amount);
+  };
 
   return (
     <View style={styles.container}>
-      <Header />
+      <Header title="Rental Shop" />
       {cardData.map((data) => (
-        <Cards
+        <MyCards
           key={data.id}
           image={data.image}
           title={data.title}
           description={data.description}
           payment={data.payment}
+          updateOrder={(count) => updateOrder(data.payment * count)}
         />
       ))}
-      <OrderSummary />
+      <OrderSummary totalPayment={totalPayment} />
     </View>
   );
 };
