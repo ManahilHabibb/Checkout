@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
-import CheckButton from './CheckButton';
+import CheckButton from './checkbutton';
 
-const Cards = ({ image, title, description, payment }) => (
-  <View style={styles.container}>
+const Cards = ({ image, title, description, payment, onPress }) => (
+  <TouchableOpacity onPress={onPress} style={styles.container}>
     <View style={styles.imageContainer}>
       <Image source={image} style={styles.image} />
     </View>
@@ -15,7 +15,7 @@ const Cards = ({ image, title, description, payment }) => (
     <View style={styles.buttonContainer}>
       <CheckButton />
     </View>
-  </View>
+  </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({

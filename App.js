@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Cards from './components/Cards';
+import Cards from './Cards';
 import OrderSummary from './components/OrderSummary';
 import Header from './components/header';
 const App = () => {

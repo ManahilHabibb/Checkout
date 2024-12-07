@@ -1,11 +1,68 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { TouchableOpacity, Text, View, StyleSheet, Alert } from 'react-native';
 
 const CheckButton = () => {
   const [count, setCount] = useState(0);
 
-  const increment = () => setCount((prev) => prev + 1);
-  const decrement = () => setCount((prev) => (prev > 0 ? prev - 1 : 0));
+  // Fetch initial count from the database
+  useEffect(() => {
+    const fetchCount = async () => {
+      try {
+        const response = await fetch('https://your-api-url.com/get-count');
+        if (!response.ok) {
+          throw new Error('Failed to fetch count');
+        }
+        const data = await response.json();
+        setCount(data.count);
+      } catch (error) {
+        Alert.alert('Error', error.message);
+      }
+    };
+
+    fetchCount();
+  }, []);
+
+  // Increment and update the count in the database
+  const increment = async () => {
+    try {
+      const newCount = count + 1;
+      const response = await fetch('https://your-api-url.com/update-count', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ count: newCount }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update count');
+      }
+
+      setCount(newCount);
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    }
+  };
+
+  // Decrement and update the count in the database
+  const decrement = async () => {
+    try {
+      if (count > 0) {
+        const newCount = count - 1;
+        const response = await fetch('https://your-api-url.com/update-count', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ count: newCount }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to update count');
+        }
+
+        setCount(newCount);
+      }
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    }
+  };
 
   return (
     <View style={styles.checkout}>
