@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+
+const { width } = Dimensions.get('window');
 
 const Header = ({ title, onBackPress }) => {
   return (
@@ -21,9 +23,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
+    width: width * 0.9,
     height: 60,
-    paddingHorizontal: 0,
+    paddingHorizontal: 10,
     paddingVertical: 10,
+    marginBottom: 10,
+    borderRadius:10,
   },
   backButton: {
     marginRight: 16,

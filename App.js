@@ -1,25 +1,85 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import MyCards from './Cards';
-import OrderSummary from './OrderSummary';
-import Header from './Header';
+import React, { useState } from "react";
+import { View, StyleSheet, Alert, Dimensions } from "react-native";
+import MyCards from "./components/cards";
+import OrderSummary from "./components/orderSummary";
+import Header from "./components/Header";
+import { cardData } from "./cardData.js";
+
+// Firebase URL configuration
+const FIREBASE_URL = "https://exam-243e6-default-rtdb.firebaseio.com/";
 
 const App = () => {
+  const saveToFirebase = async (items, totalPayment) => {
+    try {
+      const response = await fetch(`${FIREBASE_URL}/checkout.json`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          items: items,
+          totalPayment: totalPayment,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save data.");
+      }
+
+      Alert.alert("Success", "Items saved successfully!", [{ text: "OK" }]);
+    } catch (error) {
+      Alert.alert("Error", "Failed to save items: " + error.message, [
+        { text: "OK" },
+      ]);
+    }
+  };
+
   const [totalPayment, setTotalPayment] = useState(0);
+  const [selectedItems, setSelectedItems] = useState([]);
 
-  const cardData = [
-    { id: 1, image: require('./assets/1.png'), title: 'Florence Chair', description: '$45/mo.', payment: 45 },
-    { id: 2, image: require('./assets/2.png'), title: 'Florence Sofa', description: '$39/mo.', payment: 39 },
-    { id: 3, image: require('./assets/3.png'), title: 'Harper Chair', description: '$28/mo.', payment: 28 },
-  ];
+  const updateOrder = (item, count) => {
+    const existingItemIndex = selectedItems.findIndex((i) => i.id === item.id);
 
-  const updateOrder = (amount) => {
-    setTotalPayment((prev) => prev + amount);
+    let updatedItems = [...selectedItems];
+
+    if (existingItemIndex > -1) {
+      if (count === 0) {
+        // Remove item if count is 0
+        updatedItems = updatedItems.filter((i) => i.id !== item.id);
+      } else {
+        // Update existing item's count
+        updatedItems[existingItemIndex] = { ...item, count };
+      }
+    } else if (count > 0) {
+      // Add new item
+      updatedItems.push({ ...item, count });
+    }
+
+    setSelectedItems(updatedItems);
+
+    // Recalculate total payment
+    const newTotalPayment = updatedItems.reduce(
+      (total, item) => total + item.payment * item.count,
+      0
+    );
+    setTotalPayment(newTotalPayment);
+  };
+
+  const handleRent = () => {
+    // Save selected items to Firebase
+    if (selectedItems.length > 0) {
+      saveToFirebase(selectedItems, totalPayment);
+    } else {
+      Alert.alert("No Items", "Please select at least one item to rent", [
+        { text: "OK" },
+      ]);
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Header title="Rental Shop" />
+      <Header title="Rental Shop" onBackPress={() => {}} />
       {cardData.map((data) => (
         <MyCards
           key={data.id}
@@ -27,10 +87,10 @@ const App = () => {
           title={data.title}
           description={data.description}
           payment={data.payment}
-          updateOrder={(count) => updateOrder(data.payment * count)}
+          updateOrder={(count) => updateOrder(data, count)}
         />
       ))}
-      <OrderSummary totalPayment={totalPayment} />
+      <OrderSummary totalPayment={totalPayment} onRentPress={handleRent} />
     </View>
   );
 };
@@ -38,9 +98,9 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f5f5f5",
     padding: 20,
   },
 });

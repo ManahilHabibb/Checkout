@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import CheckButton from './CheckButton';
+
+const { width } = Dimensions.get('window');
 
 const MyCards = ({ image, title, description, payment, updateOrder }) => {
   const [count, setCount] = useState(0);
 
+  const handleUpdateOrder = (newCount) => {
+    setCount(newCount);
+    updateOrder(newCount);
+  };
+
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={image} style={styles.image} />
+        <Image source={image} style={styles.image} resizeMode="contain" />
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>
@@ -16,7 +23,11 @@ const MyCards = ({ image, title, description, payment, updateOrder }) => {
         <Text style={styles.payment}>${payment * count}/mo</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <CheckButton count={count} setCount={setCount} updateOrder={updateOrder} />
+        <CheckButton 
+          count={count} 
+          setCount={setCount} 
+          updateOrder={handleUpdateOrder} 
+        />
       </View>
     </TouchableOpacity>
   );
@@ -35,7 +46,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     padding: 10,
-    width: 350,
+    width: width * 0.9,
   },
   imageContainer: {
     flex: 1,
