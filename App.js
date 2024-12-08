@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import { cardData } from "./cardData.js";
 
 // Firebase URL configuration
-const FIREBASE_URL = "https://task-02-72a4d-default-rtdb.firebaseio.com/";
+const FIREBASE_URL = "https://sofa-56226-default-rtdb.firebaseio.com/";
 
 const App = () => {
   const saveToFirebase = async (items, totalPayment) => {
