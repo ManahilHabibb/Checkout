@@ -21,6 +21,7 @@ const OrderSummary = ({ totalPayment, onRentPress }) => {
           <Text>${totalPayment.toFixed(2)}</Text>
           <Text>${deliveryFee}</Text>
           <Text>{rentalPeriod} months</Text>
+
           <Text style={styles.subtotalText}>${(totalPayment + deliveryFee).toFixed(2)}</Text>
         </View>
       </View>
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#FFF',
     borderRadius: 6,
-    shadowColor: '#000',
+    shadowColor: 'blue',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
@@ -71,6 +72,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   buttonText: {
     fontSize: 16,

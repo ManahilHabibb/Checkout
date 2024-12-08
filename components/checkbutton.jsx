@@ -34,11 +34,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginRight: 19,
   },
   decrement: {
     width: 30,
     height: 30,
-    borderRadius: 15,
+    borderRadius: 5,
     backgroundColor: '#ccc',
     justifyContent: 'center',
     alignItems: 'center',
@@ -54,14 +55,16 @@ const styles = StyleSheet.create({
   increment: {
     width: 30,
     height: 30,
-    borderRadius: 15,
-    backgroundColor: '#ccc',
+    borderRadius: 5,
+    backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
+
   },
   incrementText: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: 'white',
   },
 });
 

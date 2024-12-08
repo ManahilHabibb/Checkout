@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Image, Dimensions } from 'react-native';
-import CheckButton from './CheckButton';
+import CheckButton from './checkbutton';
 
 const { width } = Dimensions.get('window');
 
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 10,
     marginBottom: 20,
-    shadowColor: '#000',
+    shadowColor: 'blue',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,

@@ -27,8 +27,14 @@ const styles = StyleSheet.create({
     height: 60,
     paddingHorizontal: 10,
     paddingVertical: 10,
-    marginBottom: 10,
-    borderRadius:10,
+    marginBottom: 30,
+    borderRadius: 10,
+    shadowColor: 'blue',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    marginTop: 27,
   },
   backButton: {
     marginRight: 16,
@@ -37,8 +43,9 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: '800' ,
     color: 'black',
+    marginRight: 27,
   },
 });
 
